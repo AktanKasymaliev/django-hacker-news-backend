@@ -3,7 +3,7 @@ from .models import Post, Comment, UpvotePost, ReplyComment
 from .serializers import *
 from django.contrib.auth.models import User
 from rest_framework import permissions, response
-
+from .permissions import IsOwner
 
 # work with post object
 class PostListView(generics.ListAPIView):
@@ -21,14 +21,14 @@ class PostUpdateView(generics.UpdateAPIView):
     queryset = Post.objects.all()
     permission_classes = [permissions.IsAuthenticated,
                           permissions.IsAdminUser,
-                          permissions.IsOwner]
+                          IsOwner]
 
 class PostDeleteView(generics.DestroyAPIView):
     serializer_class = PostDeleteSerializer
     queryset = Post.objects.all()
     permission_classes = [permissions.IsAuthenticated,
                           permissions.IsAdminUser,
-                          permissions.IsOwner]
+                          IsOwner]
 
 
 # Work with upvote object
@@ -61,7 +61,7 @@ class CommentCreateView(generics.CreateAPIView):
 class CommentRUDView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentRUDSerializer
     queryset = Comment.objects.all()
-    permission_classes = [permissions.IsOwner, permissions.IsAuthenticated, permissions.IsAdminUser]
+    permission_classes = [IsOwner, permissions.IsAuthenticated, permissions.IsAdminUser]
     
 
 # work with replycomments
@@ -79,21 +79,10 @@ class ReplyCreateComment(generics.CreateAPIView):
 class ReplyDeleteCommentView(generics.DestroyAPIView):
     serializer_class = ReplyDeleteCommentSerializer
     queryset = ReplyComment
-    permission_classes = [permissions.IsOwner, permissions.IsAuthenticated, permissions.IsAdminUser]
+    permission_classes = [IsOwner, permissions.IsAuthenticated, permissions.IsAdminUser]
 
 
 # Create user
 class RegisterUserView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
     queryset = User.objects.all()
-
-    # def post(self, request):
-        # serializer = RegisterSerializer(data=request.data)
-        # if serializer.is_valid():
-        #     user_info = serializer.save()
-        #     user = User.objects.create(username=user_info.username, email=user_info.email)
-        #     user.set_password(user_info.password) 
-        #     user.save()
-        #     return response.Response(data=serializer.data, status=status.HTTP_201_CREATED)
-        # else:
-        #     return response.Response(data=serializer.data, status=status.HTTP_400_BAD_REQUEST)
