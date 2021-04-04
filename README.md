@@ -56,5 +56,5 @@ GRANT ALL PRIVILEGES ON DATABASE <database name> TO '<database user>';
 
 * And finally start project: `python3 manage.py runserver`
 
-#### Postman collection: https://web.postman.co/workspace/My-Workspace~a9d49b78-fa0f-4ace-86c5-5857e23a6310/documentation/14689518-81e713de-c6da-4a87-8622-42504c36fefc
+#### Postman collection: https://documenter.getpostman.com/view/14689518/TzCQaRmZ
 #### Deployed project: https://boiling-river-68889.herokuapp.com/
