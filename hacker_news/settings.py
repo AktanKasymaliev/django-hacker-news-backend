@@ -64,7 +64,7 @@ ROOT_URLCONF = 'hacker_news.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/venv/lib/python3.8/site-packages/rest_framework/templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -149,11 +149,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'venv/lib/python3.8/site-packages/rest_framework/static')
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'venv/lib/python3.8/site-packages/rest_framework/static'),
+("js", os.path.join(STATIC_ROOT, 'js')),
+("css", os.path.join(STATIC_ROOT, 'css')),
+("images", os.path.join(STATIC_ROOT, 'images')),
+("fonts", os.path.join(STATIC_ROOT, 'fonts')),
 )
 
 # SIMPLE_JWT settings
