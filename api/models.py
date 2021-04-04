@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Post(models.Model):
     title = models.CharField(max_length=255)
     link = models.URLField()
@@ -31,7 +32,7 @@ class Comment(models.Model):
 
 
 class ReplyComment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='reply_comment')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='comment')
     message = models.TextField()
@@ -39,4 +40,5 @@ class ReplyComment(models.Model):
 
     def __str__(self):
         return f"Reply to {self.comment}"
+
 
