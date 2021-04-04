@@ -55,3 +55,5 @@ GRANT ALL PRIVILEGES ON DATABASE <database name> TO '<database user>';
 
 
 * And finally start project: `python3 manage.py runserver`
+
+# Deployed project https://boiling-river-68889.herokuapp.com/
