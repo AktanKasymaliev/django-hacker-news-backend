@@ -30,7 +30,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['0.0.0.0', 'boiling-river-68889.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -94,7 +94,7 @@ DATABASES = {
 
         'PASSWORD': config('DB_PASSWORD'),
 
-        'HOST': 'ec2-3-233-43-103.compute-1.amazonaws.com',
+        'HOST': 'localhost',
 
         'PORT': 5432,
 

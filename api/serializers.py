@@ -34,8 +34,8 @@ class PostUpdateSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         request = self.context.get('request')
-        instance.title = validated_data.get('title')
-        instance.link = validated_data.get('link')
+        instance.title = validated_data.get('title', instance.title)
+        instance.link = validated_data.get('link', instance.link)
         instance.author_name = request.user
         instance.save()
         return instance
@@ -125,6 +125,12 @@ class CommentCreateSerializer(serializers.ModelSerializer):
             **validated_data)
         return comment
 
+    def to_representation(self, instance):
+        representation = super(CommentCreateSerializer, self).to_representation(instance)
+        representation['author_name'] = instance.author_name.username
+        representation['post'] = instance.post.title
+        return representation
+
 # RUD comment 
 class CommentRUDSerializer(serializers.ModelSerializer):
     class Meta:
@@ -133,9 +139,9 @@ class CommentRUDSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         request = self.context.get('request')
-        instance.post = validated_data.get('post')
+        instance.post = validated_data.get('post', instance.post)
         instance.author_name = request.user
-        instance.content = validated_data.get('content')
+        instance.content = validated_data.get('content', instance.content)
         instance.save()
         return instance
 

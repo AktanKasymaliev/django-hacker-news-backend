@@ -29,6 +29,6 @@ urlpatterns = [
 
     # replycomments
     path('replies/comments/', ReplyCommentView().as_view(), name='reply_comment'),
-    path('reply/', ReplyCreateComment.as_view(), name='reply_comment_create'),
+    path('reply/add/', ReplyCreateComment.as_view(), name='reply_comment_create'),
     path('reply/delete/<int:pk>/', ReplyDeleteCommentView.as_view(), name='reply_comment_delete'),
 ]
