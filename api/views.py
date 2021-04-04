@@ -1,8 +1,7 @@
-from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, status
 from .models import Post, Comment, UpvotePost, ReplyComment
 from .serializers import *
-
+from django.contrib.auth.models import User
 from rest_framework import permissions, response
 
 
@@ -16,6 +15,13 @@ class PostCreateView(generics.CreateAPIView):
     queryset = Post.objects.all()
     permission_classes = [permissions.IsAuthenticated]
 
+
+class PostUpdateView(generics.UpdateAPIView):
+    serializer_class = PostUpdateSerializer
+    queryset = Post.objects.all()
+    permission_classes = [permissions.IsAuthenticated,
+                          permissions.IsAdminUser,
+                          permissions.IsOwner]
 
 class PostDeleteView(generics.DestroyAPIView):
     serializer_class = PostDeleteSerializer
@@ -33,6 +39,11 @@ class UpvoteListView(generics.ListAPIView):
 class UpvoteAddView(generics.CreateAPIView):
     serializer_class = UpvoteAddSerializer
     queryset = UpvotePost
+
+class UpvoteDeleteView(generics.DestroyAPIView):
+    serializer_class = UpvoteDeleteSerializer
+    queryset = UpvotePost
+
 
 
 # work with comment obj 
@@ -70,3 +81,19 @@ class ReplyDeleteCommentView(generics.DestroyAPIView):
     queryset = ReplyComment
     permission_classes = [permissions.IsOwner, permissions.IsAuthenticated, permissions.IsAdminUser]
 
+
+# Create user
+class RegisterUserView(generics.CreateAPIView):
+    serializer_class = RegisterSerializer
+    queryset = User.objects.all()
+
+    # def post(self, request):
+        # serializer = RegisterSerializer(data=request.data)
+        # if serializer.is_valid():
+        #     user_info = serializer.save()
+        #     user = User.objects.create(username=user_info.username, email=user_info.email)
+        #     user.set_password(user_info.password) 
+        #     user.save()
+        #     return response.Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        # else:
+        #     return response.Response(data=serializer.data, status=status.HTTP_400_BAD_REQUEST)
