@@ -55,6 +55,11 @@ GRANT ALL PRIVILEGES ON DATABASE <database name> TO '<database user>';
 
 
 * And finally start project: `python3 manage.py runserver`
-
+#### Docker file is nor complete! to run docker 
+```
+$ docker build -t hacker -f Dockerfile .
+$ docker run -it -p 8888:8888 hacker
+and go to 0.0.0.0:8888
+```
 #### Postman collection: https://documenter.getpostman.com/view/14689518/TzCQaRmZ
-#### Deployed project: https://boiling-river-68889.herokuapp.com/
+#### Deployed project: https://boiling-river-68889.herokuapp.com/ (static filles doesn't working)
