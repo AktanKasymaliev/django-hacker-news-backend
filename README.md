@@ -3,7 +3,7 @@
 Hello, in the first, you sould clone rep:
 * cloning repository:
 ```
-git clone https://github.com/AktanKasymaliev/online_store.git
+git clone https://github.com/AktanKasymaliev/hacker_news.git
 ```
 * Download virtual enviroment:
 ```
