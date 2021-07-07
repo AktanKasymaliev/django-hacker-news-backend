@@ -65,4 +65,3 @@ and go to 0.0.0.0:8888
 
 
 #### Postman collection: https://documenter.getpostman.com/view/14689518/TzCQaRmZ
-#### Deployed project: https://boiling-river-68889.herokuapp.com/ (static filles doesn't working)
